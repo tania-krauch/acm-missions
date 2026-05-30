@@ -1,0 +1,55 @@
+Meeting #1
+5/30/2026
+
+Goals:
+
++ Figure out what kind of game we are making
+	+ brainstorm possible ideas
++ Scope of project
++ Fill out Web_Game_Proposal
+
+
+Questions:
+Format?
+	+ Episodes(story)
+	+ Pick random puzzle
+	+ Mobile phone
+	+ Multiplayer? -> engagement
+User management
+	+ Making our own || IUSB usrmgmnt
+		+ Domain
+			+ Cloudflare
+				Ronit has spare domains to use 
+		+ user verify
+			+ secure -> 2 factor
+				+ 3rd party  coolMath etc
+				+ Django? idk how to spell this
+				+ superbase (can be ran locally)
+					+ basic user management
+	+ # users -> >10
+
+MVP
+	+ minimum viable product requirements
+
+Images
+	+ Online Assets
+	+ SVG
+	+ Style
+		+ Color Scheme
+		+ Rendering Effect
+			+ Pixel art
+		+ Tania Vision
+			+ ACM Mascot && Change sprite color ++ Animated
+			+ Similar Games asP/visuals
+				+ think
+					+ Among Us
+					+ Minecraft
+					+ Game starts you see electronics, you work directly with the puzzle
+					  Among us puzzle POV
+		+ Images are being made see pin in GitHub for images.		
+
+
+
+
+
+
