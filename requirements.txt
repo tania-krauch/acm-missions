@@ -1,0 +1,86 @@
+# ACM Missions requirements
+#
+# This project is a Node.js / TypeScript / Docker project, not a Python project.
+# Do not run `pip install -r requirements.txt`.
+# Canonical dependency installation is:
+#
+#   corepack enable
+#   corepack prepare pnpm@9.15.4 --activate
+#   pnpm install
+#
+# The package manifests and lockfile remain the source of truth:
+# - package.json
+# - pnpm-lock.yaml
+# - apps/*/package.json
+# - packages/*/package.json
+
+[system]
+Node.js >= 22
+pnpm = 9.15.4
+Docker Desktop with Docker Compose v2
+Modern browser: Chrome, Edge, Firefox, or Safari
+Hosted Supabase project
+
+[docker-images]
+node:22-alpine
+nginx:1.27-alpine
+
+[root-dev-dependencies]
+@types/node = ^22.10.2
+prettier = ^3.4.2
+typescript = ^5.7.2
+
+[apps/landing]
+@vitejs/plugin-react = ^4.3.4
+vite = ^6.0.7
+react = ^18.3.1
+react-dom = ^18.3.1
+@types/react = ^18.3.18
+@types/react-dom = ^18.3.5
+typescript = ^5.7.2
+
+[apps/game]
+@acm/episode-engine = workspace:*
+@acm/types = workspace:*
+@acm/ui = workspace:*
+@supabase/supabase-js = ^2.48.1
+animejs = ^3.2.2
+lucide-react = ^0.468.0
+react = ^18.3.1
+react-dom = ^18.3.1
+vite = ^6.0.7
+@types/animejs = ^3.1.13
+@types/react = ^18.3.18
+@types/react-dom = ^18.3.5
+@vitejs/plugin-react = ^4.3.4
+typescript = ^5.7.2
+
+[apps/api]
+@acm/episode-engine = workspace:*
+@acm/types = workspace:*
+@fastify/cors = ^10.0.2
+@supabase/supabase-js = ^2.48.1
+fastify = ^5.2.1
+zod = ^3.24.1
+tsx = ^4.19.2
+typescript = ^5.7.2
+
+[apps/code-runner]
+@acm/types = workspace:*
+@fastify/cors = ^10.0.2
+fastify = ^5.2.1
+zod = ^3.24.1
+tsx = ^4.19.2
+typescript = ^5.7.2
+
+[packages/episode-engine]
+@acm/types = workspace:*
+typescript = ^5.7.2
+
+[packages/types]
+typescript = ^5.7.2
+
+[packages/ui]
+react = ^18.3.1
+@types/react = ^18.3.18
+typescript = ^5.7.2

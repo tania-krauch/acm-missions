@@ -1,0 +1,27 @@
+{
+  "name": "acm-missions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "build": "pnpm -r build",
+    "check": "pnpm -r typecheck",
+    "clean": "pnpm -r clean",
+    "dev": "pnpm -r --parallel --filter @acm/landing --filter @acm/game --filter @acm/api dev",
+    "docker:dev": "docker compose up --build",
+    "docker:sandbox": "docker compose --profile sandbox up --build",
+    "lint": "pnpm -r lint",
+    "prepare": "git config core.hooksPath .githooks || true",
+    "precommit": "scripts/pre-commit-check.sh",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

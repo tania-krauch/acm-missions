@@ -1,0 +1,92 @@
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    depends_on:
+      - landing
+      - game
+      - api
+    ports:
+      - "8080:80"
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - app_net
+
+  landing:
+    build:
+      context: .
+      dockerfile: docker/node-dev.Dockerfile
+    command: pnpm --filter @acm/landing dev
+    environment:
+      VITE_GAME_PATH: /game/
+    volumes:
+      - .:/workspace
+      - node_modules:/workspace/node_modules
+    expose:
+      - "5173"
+    networks:
+      - app_net
+
+  game:
+    build:
+      context: .
+      dockerfile: docker/node-dev.Dockerfile
+    command: pnpm --filter @acm/game dev
+    environment:
+      VITE_API_URL: /api
+      VITE_BASE_PATH: /game/
+      VITE_SUPABASE_URL: ${VITE_SUPABASE_URL:-}
+      VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY:-}
+    volumes:
+      - .:/workspace
+      - node_modules:/workspace/node_modules
+    expose:
+      - "5174"
+    networks:
+      - app_net
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/node-dev.Dockerfile
+    command: pnpm --filter @acm/api dev
+    environment:
+      AUTH_MODE: ${AUTH_MODE:-mock}
+      CODE_RUNNER_URL: http://code-runner:4001
+      PORT: 3000
+      SANDBOX_ENABLED: ${SANDBOX_ENABLED:-false}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY:-}
+      SUPABASE_URL: ${SUPABASE_URL:-}
+    volumes:
+      - .:/workspace
+      - node_modules:/workspace/node_modules
+    expose:
+      - "3000"
+    networks:
+      - app_net
+      - sandbox_net
+
+  code-runner:
+    profiles:
+      - sandbox
+    build:
+      context: .
+      dockerfile: docker/node-dev.Dockerfile
+    command: pnpm --filter @acm/code-runner dev
+    environment:
+      PORT: 4001
+    volumes:
+      - .:/workspace:ro
+      - node_modules:/workspace/node_modules
+    expose:
+      - "4001"
+    networks:
+      - sandbox_net
+
+volumes:
+  node_modules:
+
+networks:
+  app_net:
+  sandbox_net:
+    internal: true

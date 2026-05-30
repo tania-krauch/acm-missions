@@ -1,0 +1,32 @@
+{
+  "name": "@acm/game",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && vite build",
+    "clean": "rm -rf dist",
+    "dev": "vite --host 0.0.0.0 --port 5174",
+    "lint": "pnpm typecheck",
+    "preview": "vite preview --host 0.0.0.0 --port 4174",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@acm/episode-engine": "workspace:*",
+    "@acm/types": "workspace:*",
+    "@acm/ui": "workspace:*",
+    "@supabase/supabase-js": "^2.48.1",
+    "animejs": "^3.2.2",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^6.0.7"
+  },
+  "devDependencies": {
+    "@types/animejs": "^3.1.13",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.2"
+  }
+}
