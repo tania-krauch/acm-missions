@@ -18,7 +18,8 @@ services:
       dockerfile: docker/node-dev.Dockerfile
     command: pnpm --filter @acm/landing dev
     environment:
-      VITE_GAME_PATH: /game/
+      VITE_LANDING_BASE_URL: /
+      VITE_GAME_BASE_URL: /game
     volumes:
       - .:/workspace
       - node_modules:/workspace/node_modules
@@ -33,8 +34,9 @@ services:
       dockerfile: docker/node-dev.Dockerfile
     command: pnpm --filter @acm/game dev
     environment:
-      VITE_API_URL: /api
-      VITE_BASE_PATH: /game/
+      VITE_API_BASE_URL: /api
+      VITE_GAME_BASE_URL: /game
+      VITE_GAME_BASE_PATH: /game/
       VITE_SUPABASE_URL: ${VITE_SUPABASE_URL:-}
       VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY:-}
     volumes:
@@ -55,6 +57,8 @@ services:
       CODE_RUNNER_URL: http://code-runner:4001
       PORT: 3000
       SANDBOX_ENABLED: ${SANDBOX_ENABLED:-false}
+      API_BASE_URL: ${API_BASE_URL:-/api}
+      SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-}
       SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY:-}
       SUPABASE_URL: ${SUPABASE_URL:-}
     volumes:

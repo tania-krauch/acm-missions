@@ -1,4 +1,5 @@
-const gamePath = import.meta.env.VITE_GAME_PATH ?? "/game/";
+const gameBaseUrl = (import.meta.env.VITE_GAME_BASE_URL ?? "/game").replace(/\/$/, "");
+const gamePath = import.meta.env.VITE_GAME_SIGN_IN_URL ?? `${gameBaseUrl}/sign-in`;
 
 export default function App() {
   return (
