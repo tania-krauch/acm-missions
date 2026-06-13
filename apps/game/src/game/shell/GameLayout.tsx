@@ -1,6 +1,6 @@
 import type { Challenge, ChallengeResult, Episode } from "@acm/types";
 import { IconButton, StatusPill } from "@acm/ui";
-import { HelpCircle, Map, RadioTower, ShieldAlert, Zap } from "lucide-react";
+import { HelpCircle, LogOut, Map, RadioTower, ShieldAlert, Zap } from "lucide-react";
 import type { ReactNode } from "react";
 import { TerminalWindow } from "./TerminalWindow";
 
@@ -9,8 +9,10 @@ interface GameLayoutProps {
   challenges: Challenge[];
   activeChallengeId: string;
   lastResult?: ChallengeResult;
+  playerName: string;
   children: ReactNode;
   onSelectChallenge: (challengeId: string) => void;
+  onSignOut: () => void;
 }
 
 export function GameLayout({
@@ -18,8 +20,10 @@ export function GameLayout({
   challenges,
   activeChallengeId,
   lastResult,
+  playerName,
   children,
   onSelectChallenge,
+  onSignOut,
 }: GameLayoutProps) {
   const activeChallenge = challenges.find((challenge) => challenge.id === activeChallengeId);
 
@@ -64,7 +68,7 @@ export function GameLayout({
             <Zap size={28} />
           </div>
           <div>
-            <strong>Pixel</strong>
+            <strong>{playerName}</strong>
             <div className="health-bar">
               <span />
               <span />
@@ -86,6 +90,9 @@ export function GameLayout({
           </IconButton>
           <IconButton label="Open map">
             <Map size={30} />
+          </IconButton>
+          <IconButton label="Sign out" onClick={onSignOut}>
+            <LogOut size={28} />
           </IconButton>
         </section>
 

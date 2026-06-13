@@ -56,7 +56,9 @@ App ports during local development:
 | App | URL |
 | --- | --- |
 | Landing | `http://localhost:5173` |
-| Game | `http://localhost:5174/game/` |
+| Game sign in | `http://localhost:5174/game/sign-in` |
+| Game sign up | `http://localhost:5174/game/sign-up` |
+| Game play shell | `http://localhost:5174/game/play` |
 | API | `http://localhost:3000/health` |
 
 ## Docker Development
@@ -71,7 +73,7 @@ Then open:
 
 ```txt
 http://localhost:8080
-http://localhost:8080/game/
+http://localhost:8080/game/sign-in
 http://localhost:8080/health
 http://localhost:8080/api/episodes
 ```
@@ -90,13 +92,19 @@ Copy `.env.example` to `.env` when you are ready to configure local secrets.
 
 ```txt
 AUTH_MODE=mock
+LANDING_BASE_URL=http://localhost:5173
+GAME_BASE_URL=http://localhost:5174/game
+API_BASE_URL=http://localhost:3000/api
 SUPABASE_URL=
+SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 SANDBOX_ENABLED=false
 CODE_RUNNER_URL=http://code-runner:4001
 
-VITE_API_URL=/api
-VITE_BASE_PATH=/game/
+VITE_LANDING_BASE_URL=http://localhost:5173
+VITE_GAME_BASE_URL=http://localhost:5174/game
+VITE_GAME_BASE_PATH=/game/
+VITE_API_BASE_URL=http://localhost:3000/api
 VITE_SUPABASE_URL=
 VITE_SUPABASE_ANON_KEY=
 ```
@@ -110,6 +118,29 @@ Authorization: Bearer <access-token>
 ```
 
 Do not expose `SUPABASE_SERVICE_ROLE_KEY` in frontend code.
+
+The URL variables are the deployment switches:
+
+| Variable | Used by | Local direct dev | Docker / same-origin deploy |
+| --- | --- | --- | --- |
+| `VITE_LANDING_BASE_URL` | Landing public URL references | `http://localhost:5173` | `/` |
+| `VITE_GAME_BASE_URL` | Landing links, game auth redirects, game route builder | `http://localhost:5174/game` | `/game` |
+| `VITE_GAME_BASE_PATH` | Vite game asset/router base path | `/game/` | `/game/` |
+| `VITE_API_BASE_URL` | Browser calls from game to API | `http://localhost:3000/api` | `/api` |
+| `API_BASE_URL` | Server/deploy metadata for the API public route | `http://localhost:3000/api` | `/api` |
+
+For local Supabase login, fill these values:
+
+```txt
+SUPABASE_URL=https://<project-ref>.supabase.co
+SUPABASE_ANON_KEY=<anon-public-key>
+SUPABASE_SERVICE_ROLE_KEY=<optional-server-only-service-role-key>
+VITE_SUPABASE_URL=https://<project-ref>.supabase.co
+VITE_SUPABASE_ANON_KEY=<anon-public-key>
+```
+
+The game uses `VITE_SUPABASE_*` values for browser sign in and sign up. The API uses
+`SUPABASE_URL` plus `SUPABASE_SERVICE_ROLE_KEY` or `SUPABASE_ANON_KEY` to validate bearer tokens.
 
 ## Routing
 

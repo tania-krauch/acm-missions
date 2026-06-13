@@ -37,6 +37,244 @@ button {
   color: inherit;
 }
 
+.auth-screen {
+  min-height: 100vh;
+  padding: clamp(1rem, 4vw, 3rem);
+  background:
+    linear-gradient(90deg, rgba(56, 199, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(83, 227, 143, 0.045) 1px, transparent 1px),
+    linear-gradient(135deg, rgba(255, 156, 58, 0.1), transparent 44%),
+    #05080d;
+  background-size:
+    48px 48px,
+    48px 48px,
+    auto,
+    auto;
+}
+
+.auth-shell {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.68fr) minmax(360px, 0.58fr) minmax(280px, 0.62fr);
+  align-items: center;
+  gap: clamp(1.25rem, 4vw, 3.5rem);
+  width: min(1280px, 100%);
+  min-height: calc(100vh - clamp(2rem, 8vw, 6rem));
+  margin: 0 auto;
+}
+
+.auth-copy {
+  max-width: 640px;
+}
+
+.auth-kicker {
+  margin: 0 0 0.85rem;
+  color: var(--color-green);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.auth-copy h1 {
+  max-width: 9ch;
+  margin: 0;
+  color: #f5fbff;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(3.4rem, 7vw, 6.5rem);
+  line-height: 0.94;
+  letter-spacing: 0;
+}
+
+.auth-copy p:not(.auth-kicker) {
+  max-width: 52ch;
+  margin: 1.35rem 0 0;
+  color: #a9c7d8;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.auth-console {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.9rem;
+  align-self: center;
+  padding: 1rem;
+  border: 2px solid #255170;
+  border-radius: 8px;
+  background: rgba(4, 12, 20, 0.94);
+  box-shadow:
+    inset 0 0 0 1px rgba(122, 217, 255, 0.14),
+    0 24px 70px rgba(0, 0, 0, 0.42);
+}
+
+.auth-console-header {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.3rem;
+  color: var(--color-cyan);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.auth-mode-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem;
+  padding: 0.25rem;
+  border: 1px solid rgba(122, 217, 255, 0.16);
+  border-radius: 6px;
+  background: rgba(2, 7, 12, 0.72);
+}
+
+.auth-mode-switch button {
+  min-height: 2.35rem;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--color-muted);
+  cursor: pointer;
+}
+
+.auth-mode-switch .auth-mode-active,
+.auth-mode-switch button:hover {
+  border-color: rgba(56, 199, 255, 0.36);
+  color: var(--color-cyan-soft);
+  background: rgba(56, 199, 255, 0.1);
+}
+
+.auth-field {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 3.15rem;
+  padding: 0 0.85rem;
+  border: 1px solid #244d69;
+  border-radius: 6px;
+  color: var(--color-cyan);
+  background: rgba(3, 10, 16, 0.82);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.auth-field:focus-within {
+  border-color: var(--color-cyan);
+  box-shadow: 0 0 18px rgba(56, 199, 255, 0.22);
+}
+
+.auth-field input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  color: var(--color-text);
+  background: transparent;
+}
+
+.auth-field input::placeholder {
+  color: #557386;
+}
+
+.auth-alert,
+.auth-message {
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(255, 156, 58, 0.42);
+  border-radius: 6px;
+  color: #ffd5a5;
+  background: rgba(255, 156, 58, 0.08);
+  line-height: 1.45;
+}
+
+.auth-message {
+  border-color: rgba(56, 199, 255, 0.36);
+  color: var(--color-cyan-soft);
+  background: rgba(56, 199, 255, 0.08);
+}
+
+.auth-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  border: 1px solid var(--color-cyan);
+  border-radius: 6px;
+  color: #041018;
+  background: var(--color-cyan);
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    filter 160ms ease,
+    transform 160ms ease;
+}
+
+.auth-submit:not(:disabled):hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.auth-submit:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.6);
+  opacity: 0.65;
+}
+
+.auth-panel {
+  position: relative;
+  min-height: min(72vh, 620px);
+  border: 2px solid #16344d;
+  border-radius: 8px;
+  overflow: hidden;
+  background:
+    linear-gradient(145deg, rgba(17, 38, 55, 0.96), rgba(4, 12, 20, 0.96)),
+    repeating-linear-gradient(90deg, transparent 0 36px, rgba(56, 199, 255, 0.06) 37px 39px);
+  box-shadow:
+    inset 0 0 0 1px rgba(122, 217, 255, 0.12),
+    0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+.auth-panel-light {
+  position: absolute;
+  top: 12%;
+  left: 18%;
+  width: 64%;
+  height: 0.5rem;
+  border-radius: 99px;
+  background: #7ad9ff;
+  box-shadow: 0 0 26px #38c7ff;
+}
+
+.auth-panel-grid {
+  position: absolute;
+  inset: 24% 12% 18%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0.5rem;
+}
+
+.auth-panel-grid span {
+  min-height: 2.8rem;
+  border: 1px solid rgba(122, 217, 255, 0.16);
+  background: rgba(5, 16, 27, 0.72);
+}
+
+.auth-panel-status {
+  position: absolute;
+  right: 12%;
+  bottom: 10%;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.auth-panel-status span {
+  width: 0.8rem;
+  height: 0.8rem;
+  background: #ff9c3a;
+  box-shadow: 0 0 16px rgba(255, 156, 58, 0.7);
+}
+
 .game-screen {
   min-height: 100vh;
   padding: clamp(0.75rem, 2vw, 1.5rem);
@@ -662,6 +900,19 @@ button {
 }
 
 @media (max-width: 920px) {
+  .auth-shell {
+    grid-template-columns: 1fr;
+    align-content: start;
+  }
+
+  .auth-copy h1 {
+    max-width: 10ch;
+  }
+
+  .auth-panel {
+    min-height: 280px;
+  }
+
   .ship-room {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
